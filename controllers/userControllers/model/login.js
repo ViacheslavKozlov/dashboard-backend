@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const { User } = require("../../../schemas");
 const { userServices } = require("../../../services");
 const { Unautorized } = require("../../../helpers/errHandler.js");
 require("dotenv").config();
@@ -9,7 +8,6 @@ const login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const user = await userServices.findUserByEmail({ email });
-
     if (!user || !user.comparePassword(password)) {
       throw new Unautorized("Email or password are not verified");
     }

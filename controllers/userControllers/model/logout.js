@@ -1,4 +1,3 @@
-const { User } = require("../../../schemas");
 const { userServices } = require("../../../services");
 
 const logout = async (req, res, next) => {

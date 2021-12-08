@@ -39,8 +39,6 @@ userSchema.methods.setPassword = function(password) {
 };
 
 userSchema.methods.comparePassword = function(password) {
-  // console.log(password);
-  // console.log(this.pasword);
   return bcrypt.compareSync(password, this.password);
 };
 
