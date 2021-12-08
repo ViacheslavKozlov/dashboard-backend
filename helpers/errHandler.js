@@ -22,13 +22,20 @@ class ValidationError extends Error {
     this.status = 400;
   }
 }
+class Conflict extends Error {
+  constructor(message) {
+    super(message);
+    this.status = 409;
+  }
+}
 
-const errHandler = (err, req, res, next) => {
+const errHandler = (error, req, res, next) => {
   if (
-    err instanceof Unautorized ||
-    err instanceof NotFound ||
-    err instanceof MissedParamsError ||
-    err instanceof ValidationError
+    error instanceof Unautorized ||
+    error instanceof NotFound ||
+    error instanceof MissedParamsError ||
+    error instanceof ValidationError ||
+    error instanceof Conflict
   ) {
     return res.status(error.status).json({ message: error.message });
   }
@@ -40,5 +47,6 @@ module.exports = {
   NotFound,
   MissedParamsError,
   ValidationError,
+  Conflict,
   errHandler
 };
