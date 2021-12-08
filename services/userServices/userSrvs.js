@@ -18,4 +18,35 @@ const loginUser = async (_id, token) => {
   }
 };
 
-module.exports = { createUser, loginUser };
+const logoutUser = async _id => {
+  try {
+    await User.findByIdAndUpdate(_id, { token: null });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+const findUserByEmail = async ({ email }) => {
+  try {
+    const user = await User.findOne({ email });
+    return user;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const findUserById = async _id => {
+  try {
+    const user = await User.findById(_id);
+    return user;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+module.exports = {
+  createUser,
+  loginUser,
+  logoutUser,
+  findUserByEmail,
+  findUserById
+};

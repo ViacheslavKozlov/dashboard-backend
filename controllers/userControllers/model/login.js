@@ -8,13 +8,13 @@ const { SECRET_KEY } = process.env;
 const login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
-    const user = await User.findOne({ email });
+    const user = await userServices.findUserByEmail({ email });
 
     if (!user || !user.comparePassword(password)) {
       throw new Unautorized("Email or password are not verified");
     }
 
-    const { _id } = user;
+    const { _id, name } = user;
     const payload = { _id };
     const token = jwt.sign(payload, SECRET_KEY);
 
@@ -26,6 +26,7 @@ const login = async (req, res, next) => {
       data: {
         token,
         user: {
+          name: name,
           email: email,
           password: password
         }
