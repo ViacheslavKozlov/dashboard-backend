@@ -1,11 +1,40 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
 const { errHandler } = require("./helpers/errHandler.js");
 const { tasksRouter, usersRouter } = require("./api");
 
 require("dotenv").config();
+
 const app = express();
+
+const swaggerOptions = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      version: "1.0.0",
+      title: "Dashboard API docs",
+      description: "API documentation for Dashboard project",
+      contact: {
+        name: "Ostatok ot deleniia"
+      },
+      servers: [
+        {
+          url: "http://localhost:3030"
+        }
+      ]
+    }
+  },
+  // apis: ["./api/userApi.js"]
+  apis: ["./api/*.js"]
+  // apis: ["app.js"]
+};
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 app.use(logger(formatsLogger));
@@ -15,7 +44,7 @@ app.use(express.json());
 app.use("/api/users", usersRouter);
 app.use("/api/tasks", tasksRouter);
 
-app.use(errHandler); // will be added in next commits
+app.use(errHandler);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
