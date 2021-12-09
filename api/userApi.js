@@ -2,6 +2,12 @@ const express = require("express");
 const router = express.Router();
 const { userControllers } = require("../controllers");
 const authorization = require("../middlewares/authMiddleware.js");
+/**
+ * @swagger
+ * tags:
+ *  name: User
+ *  description: API to manage users
+ */
 
 /**
  * @swagger
@@ -27,13 +33,6 @@ const authorization = require("../middlewares/authMiddleware.js");
  *          name: username
  *          email: email@email.com
  *          password: password
- */
-
-/**
- * @swagger
- * tags:
- *  name: User
- *  description: API to manage users
  */
 
 /**
