@@ -1,8 +1,6 @@
 const { Task } = require("../../schemas");
 
 const createTask = (userId, body) => {
-  //   const date = new Date();
-  // taskDate: date,
   return Task.create({ ...body, owner: userId });
 };
 
@@ -11,8 +9,38 @@ const getAllTasks = () => {
   return result;
 };
 const deleteTask = (userId, taskId) => {
-  const result = Task.findByIdAndRemove({ _id: taskId, owner: userId });
-
+  const result = Task.findOneAndDelete({ _id: taskId, userId });
   return result;
 };
-module.exports = { createTask, deleteTask, getAllTasks };
+
+const updateStatus = (userId, taskId, status) => {
+  const result = Task.findOneAndUpdate(
+    { _id: taskId, userId },
+    { compleated: status },
+    {
+      new: true,
+    }
+  );
+  return result;
+};
+
+const updateTask = (userId, taskId, data) => {
+  console.log("🚀 ~ file: taskSrvs.js ~ line 28 ~ updateTask ~ data", data);
+
+  const result = Task.findOneAndUpdate(
+    { _id: taskId, userId },
+    { ...data },
+    {
+      new: true,
+    }
+  );
+  return result;
+};
+
+module.exports = {
+  createTask,
+  deleteTask,
+  getAllTasks,
+  updateStatus,
+  updateTask,
+};
