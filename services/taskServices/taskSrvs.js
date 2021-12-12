@@ -1,13 +1,18 @@
 const { Task } = require("../../schemas");
 
-const createTask = (body) => {
-  const date = new Date();
-  return Task.create({ ...body, taskDate: date });
+const createTask = (userId, body) => {
+  //   const date = new Date();
+  // taskDate: date,
+  return Task.create({ ...body, owner: userId });
 };
 
 const getAllTasks = () => {
-  const tasks = Task.find();
-  return tasks;
+  const result = Task.find();
+  return result;
 };
-const deleteTask = (body) => {};
+const deleteTask = (userId, taskId) => {
+  const result = Task.findByIdAndRemove({ _id: taskId, owner: userId });
+
+  return result;
+};
 module.exports = { createTask, deleteTask, getAllTasks };
