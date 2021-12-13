@@ -16,7 +16,7 @@ const taskSchema = Schema(
       required: true,
     },
     taskDate: {
-      type: Date,
+      type: String,
       required: true,
     },
     category: {
