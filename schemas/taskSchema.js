@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const taskSchema = Schema(
   {
-    isChallege: {
+    isChallenge: {
       type: Boolean,
       default: false,
     },
