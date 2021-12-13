@@ -16,7 +16,7 @@ const deleteTask = (userId, taskId) => {
 const updateStatus = (userId, taskId, status) => {
   const result = Task.findOneAndUpdate(
     { _id: taskId, userId },
-    { compleated: status },
+    { completed: status },
     {
       new: true,
     }

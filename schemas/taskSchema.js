@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const taskSchema = Schema(
   {
-    isChallege: {
+    isChallenge: {
       type: Boolean,
       default: false,
     },
@@ -24,7 +24,7 @@ const taskSchema = Schema(
       enum: ["stuff", "family", "health", "learning", "leisure", "work"],
       default: "stuff",
     },
-    compleated: {
+    completed: {
       type: Boolean,
       default: false,
     },

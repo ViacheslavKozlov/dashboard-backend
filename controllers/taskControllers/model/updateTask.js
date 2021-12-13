@@ -4,7 +4,8 @@ const updateTask = async (req, res, next) => {
   const { taskId } = req.params;
 
   const userId = req.user.id;
-  const { isChallege, difficulty, taskName, taskDate, category } = req.body;
+  const { isChallege, difficulty, taskName, taskDate, category, completed } =
+    req.body;
   if (taskName === "") {
     return res.status(400).json({
       message: "fill in the field",
@@ -17,6 +18,7 @@ const updateTask = async (req, res, next) => {
       taskName,
       taskDate,
       category,
+      completed,
     });
 
     if (!result) {

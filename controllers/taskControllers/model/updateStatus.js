@@ -3,11 +3,11 @@ const { taskServices } = require("../../../services/index");
 const updateStatus = async (req, res, next) => {
   const { taskId } = req.params;
 
-  const { compleated } = req.body;
+  const { completed } = req.body;
   const userId = req.user.id;
 
   try {
-    const result = await taskServices.updateStatus(userId, taskId, compleated);
+    const result = await taskServices.updateStatus(userId, taskId, completed);
 
     if (!result) {
       return res.status(404).json({
