@@ -5,23 +5,23 @@ const { Schema, model } = require("mongoose");
 
 const userSchema = Schema(
   {
-    name: {
+    displayName: {
       type: String,
-      required: [true, "Name is required"]
+      required: [true, "Name is required"],
     },
     email: {
       type: String,
       required: [true, "Email is required"],
-      unique: true
+      unique: true,
     },
     password: {
       type: String,
-      required: [true, "Password is required"]
+      required: [true, "Password is required"],
     },
     token: {
       type: String,
-      default: null
-    }
+      default: null,
+    },
     // verify: {
     //   type: Boolean,
     //   default: false
@@ -34,15 +34,15 @@ const userSchema = Schema(
   { versionKey: false, timestamp: true }
 );
 
-userSchema.methods.setPassword = function(password) {
+userSchema.methods.setPassword = function (password) {
   this.password = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 };
 
-userSchema.methods.comparePassword = function(password) {
+userSchema.methods.comparePassword = function (password) {
   return bcrypt.compareSync(password, this.password);
 };
 
-userSchema.methods.createToken = function() {
+userSchema.methods.createToken = function () {
   const payload = { _id: this._id };
   return jwt.sign(payload, SECRET_KEY);
 };
