@@ -6,7 +6,7 @@ const getAllTasks = async (req, res, next) => {
     res.status(200).json({
       stastus: "success",
       code: 200,
-      data: { tesks: result },
+      data: { tasks: result },
     });
   } catch (e) {
     next(e);
