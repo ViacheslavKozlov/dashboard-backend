@@ -24,7 +24,7 @@ const taskSchema = Schema(
       enum: ["stuff", "family", "health", "learning", "leisure", "work"],
       default: "stuff",
     },
-    compleated: {
+    completed: {
       type: Boolean,
       default: false,
     },
