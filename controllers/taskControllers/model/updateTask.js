@@ -4,7 +4,7 @@ const updateTask = async (req, res, next) => {
   const { taskId } = req.params;
 
   const userId = req.user.id;
-  const { isChallege, difficulty, taskName, taskDate, category, completed } =
+  const { isChallenge, difficulty, taskName, taskDate, category, completed } =
     req.body;
   if (taskName === "") {
     return res.status(400).json({
@@ -13,7 +13,7 @@ const updateTask = async (req, res, next) => {
   }
   try {
     const result = await taskServices.updateTask(userId, taskId, {
-      isChallege,
+      isChallenge,
       difficulty,
       taskName,
       taskDate,
