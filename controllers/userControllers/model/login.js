@@ -8,27 +8,28 @@ const login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const user = await userServices.findUserByEmail({ email });
+    console.log(user);
     if (!user || !user.comparePassword(password)) {
       throw new Unautorized("Email or password are not verified");
     }
 
-    const { _id, name } = user;
+    const { _id, displayName } = user;
     const payload = { _id };
     const token = jwt.sign(payload, SECRET_KEY);
 
     await userServices.loginUser(_id, token);
-
+    console.log(user);
     res.json({
       status: "OK",
       code: 200,
       data: {
         token,
         user: {
-          name: name,
+          name: displayName,
           email: email,
-          password: password
-        }
-      }
+          password: password,
+        },
+      },
     });
   } catch (error) {
     next(error);

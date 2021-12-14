@@ -1,9 +1,11 @@
 const { User } = require("../../../schemas");
 const { Conflict } = require("../../../helpers/errHandler.js");
-const { findUserByEmail } = require("../../../services/userServices/userSrvs.js");
+const {
+  findUserByEmail,
+} = require("../../../services/userServices/userSrvs.js");
 
 const signup = async (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { displayName, email, password } = req.body;
   try {
     const data = await findUserByEmail({ email });
     if (data) {
@@ -11,9 +13,11 @@ const signup = async (req, res, next) => {
     }
 
     const user = new User({
-      name,
-      email
+      displayName,
+      email,
     });
+
+    console.log(user);
 
     user.setPassword(password);
     await user.save();
@@ -21,7 +25,7 @@ const signup = async (req, res, next) => {
     res.status(201).json({
       status: "created",
       code: 201,
-      data: user
+      data: user,
     });
   } catch (error) {
     next(error);
