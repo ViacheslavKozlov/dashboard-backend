@@ -25,7 +25,7 @@ const updateTask = async (req, res, next) => {
       return res.status(404).json({
         status: "error",
         code: 404,
-        message: "Not found !",
+        message: `Not found task id: ${taskId}`,
       });
     }
 
