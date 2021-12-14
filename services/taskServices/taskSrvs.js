@@ -4,8 +4,8 @@ const createTask = (userId, body) => {
   return Task.create({ ...body, owner: userId });
 };
 
-const getAllTasks = () => {
-  const result = Task.find();
+const getAllTasks = (owner) => {
+  const result = Task.find({ owner });
   return result;
 };
 const deleteTask = (userId, taskId) => {
