@@ -9,14 +9,13 @@ const deleteTask = async (req, res, next) => {
       return res.status(404).json({
         status: "error",
         code: 404,
-        message: `Not found task id: ${taskId}`,
-        data: "Not Found",
+        message: `Not found task with such id: ${taskId}`,
       });
     }
-    res.status(201).json({
+    res.status(200).json({
       status: "succsess",
-      code: 201,
-      message: `Task id: ${taskId} removed`,
+      code: 200,
+      message: `Task with such id: ${taskId} removed`,
     });
   } catch (e) {
     next(e);

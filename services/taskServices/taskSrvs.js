@@ -16,7 +16,7 @@ const deleteTask = (userId, taskId) => {
 const updateStatus = (userId, taskId, status) => {
   const result = Task.findOneAndUpdate(
     { _id: taskId, userId },
-    { compleated: status },
+    { completed: status },
     {
       new: true,
     }
@@ -25,8 +25,6 @@ const updateStatus = (userId, taskId, status) => {
 };
 
 const updateTask = (userId, taskId, data) => {
-  console.log("🚀 ~ file: taskSrvs.js ~ line 28 ~ updateTask ~ data", data);
-
   const result = Task.findOneAndUpdate(
     { _id: taskId, userId },
     { ...data },

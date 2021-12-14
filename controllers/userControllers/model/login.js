@@ -24,11 +24,11 @@ const login = async (req, res, next) => {
       data: {
         token,
         user: {
-          name: name,
+          name: displayName,
           email: email,
-          password: password
-        }
-      }
+          password: password,
+        },
+      },
     });
   } catch (error) {
     next(error);
